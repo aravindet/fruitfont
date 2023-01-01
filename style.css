@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap&subset=latin-ext');
+
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--bg: #fff;
+	--b2: #eee;
+	--b3: #ddd;
+	--fg: #000;
+	--f2: #ddd;
+
+	margin: 0;
+	padding: 0;
+}
+
+/* 
+@media (prefers-color-scheme:dark) {
+	:root {
+		--bg: #000;
+		--b2: #333;
+		--b3: #555;
+		--fg: #fff;
+		--f2: #666;
+	}
+} */
+
+body {
+	padding: 4rem 2rem;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	font: 300 15px/19px 'IBM Plex Mono', monospace;
+	display: flex;
+	flex-flow: column;
+	justify-content: stretch;
+	background-color: var(--bg);
+	color: var(--fg);
+	user-select: none;
+}
+
+input,
+select,
+button {
+	font: inherit;
+	padding: 0.5rem 1rem;
+	border: none;
+	color: var(--fg);
+	background-color: var(--b2);
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+	outline: none;
+	background: var(--b3);
+}
+
+#editor {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.fontpane {
+	flex: 0.1 0 auto;
+	width: 10rem;
+	margin-right: 1rem;
+
+}
+
+.fontpane-config {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	overflow: hidden;
+	gap: 1px;
+	border-radius: 5px;
+}
+
+.fontpane-config-name {
+	grid-column: 1 / -1;
+	grid-row: 1;
+	min-width: 0;
+}
+
+.fontpane-config-first,
+.fontpane-config-last,
+.fontpane-config-ystep {
+	grid-row: 2;
+	min-width: 0;
+}
+
+.fontpane-glyphs {
+	margin-top: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(3rem, 5rem));
+	gap: 2px;
+}
+
+/* .fontpane-glyphs>.preview {
+	height: 64px;
+	width: 64px;
+} */
+
+.canvas,
+.preview {
+	flex: 1;
+	display: grid;
+	grid-template-columns: repeat(16, 1fr);
+	aspect-ratio: 1;
+	transform: rotate(-90deg);
+}
+
+.canvas {
+	flex: 1;
+	gap: 2px;
+}
+
+.preview {
+	gap: 0;
+}
+
+.canvas-cell,
+.preview-cell {
+	background-color: var(--b2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: rotate(90deg);
+}
+
+.canvas-cell-outer,
+.preview-cell-outer {
+	background-color: var(--b3);
+}
+
+.canvas-cell-on,
+.preview-cell-on {
+	background-color: var(--fg);
+}

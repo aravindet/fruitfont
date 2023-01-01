@@ -1,1 +1,28 @@
-<h1>Fruitfont Editor</h1>
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FruitFont Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <template id="fontpane">
+        <div class="fontpane">
+            <div class="fontpane-config">
+                <input class="fontpane-config-name" data-prop="name" placeholder="Font name" />
+                <input class="fontpane-config-first" data-prop="first" type="number" min="0" max="255" value="32" />
+                <input class="fontpane-config-last" data-prop="last" type="number" min="0" max="255" value="127" />
+                <input class="fontpane-config-ystep" data-prop="ystep" type="number" min="0" max="255" value="10" />
+            </div>
+            <div class="fontpane-glyphs"></div>
+        </div>
+    </template>
+
+    <div id="editor"></div>
+    <script type="module" src="editor.js"></script>
+</body>
+
+</html>
