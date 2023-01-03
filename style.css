@@ -5,11 +5,14 @@
 }
 
 :root {
-	--bg: #fff;
-	--b2: #eee;
+	--bg: #eee;
+	--b2: #fff;
 	--b3: #ddd;
 	--fg: #000;
-	--f2: #ddd;
+	--f2: #999;
+
+	--accent: #6fc;
+	--radius: 7px;
 
 	margin: 0;
 	padding: 0;
@@ -48,94 +51,176 @@ button {
 	border: none;
 	color: var(--fg);
 	background-color: var(--b2);
+	display: block;
+	width: 100%;
+	min-width: 0;
+}
+
+label {
+	font-size: 12px;
+	position: relative;
+	background-color: var(--b2);
+	color: var(--f2);
+	height: 2.75rem;
+	padding: 0.25rem 1rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+label>input,
+label>select {
+	font-size: 1rem;
+	line-height: 2rem;
+	padding: 0.75rem 1rem 0 1rem;
+	position: absolute;
+	background: transparent;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+button>div {
+	font-size: 12px;
+	line-height: 1em;
+}
+
+button:disabled {
+	filter: grayscale(75%) contrast(25%) brightness(175%);
 }
 
 input:focus-visible,
 select:focus-visible,
 button:focus-visible {
 	outline: none;
-	background: var(--b3);
+	box-shadow: inset 0 -3px 0 0 var(--accent);
+}
+
+input:hover:not(:focus-visible):not(:disabled),
+select:hover:not(:focus-visible):not(:disabled),
+button:hover:not(:focus-visible):not(:disabled) {
+	box-shadow: inset 0 -1px 0 0 var(--accent);
 }
 
 #editor {
-	display: flex;
+	display: grid;
+	grid-template-columns: minmax(10rem, 20%) 1fr;
+	grid-template-areas: 'font glyph' 'variant glyph';
 	flex-direction: row;
 	align-items: flex-start;
+	gap: 1rem;
 }
 
-.fontpane {
-	flex: 0.1 0 auto;
-	width: 10rem;
-	margin-right: 1rem;
-
-}
-
-.fontpane-config {
+#font-panel {
+	grid-area: font;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	/* grid-template-areas: 'name name name name' 'first first last last' 'xmin xmin xmax xmax' 'ymin ymin ymax ymax'; */
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	border-radius: var(--radius);
 	overflow: hidden;
 	gap: 1px;
-	border-radius: 5px;
 }
 
-.fontpane-config-name {
+#font-panel>button {
+	padding: 0;
+	height: 2.75rem;
+}
+
+#font-panel>label {
+	grid-column: auto / span 2;
+}
+
+#font-panel>label.font-name {
 	grid-column: 1 / -1;
-	grid-row: 1;
+}
+
+#variant-panel {
+	grid-area: variant;
+	display: flex;
+	flex-direction: column;
+}
+
+#glyph-panel {
+	grid-area: glyph;
+	position: relative;
+}
+
+.variant {}
+
+.variant-config {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	overflow: hidden;
+	gap: 1px;
+	border-radius: var(--radius);
+}
+
+
+.variant-config-style {
 	min-width: 0;
 }
 
-.fontpane-config-first,
-.fontpane-config-last,
-.fontpane-config-ystep {
-	grid-row: 2;
+.variant-config-ystep {
 	min-width: 0;
 }
 
-.fontpane-glyphs {
+.variant-glyphs {
 	margin-top: 1rem;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(3rem, 5rem));
+	grid-template-columns: repeat(auto-fill, minmax(3rem, auto));
 	gap: 2px;
+	border-radius: var(--radius);
+	overflow: hidden;
 }
 
-/* .fontpane-glyphs>.preview {
-	height: 64px;
-	width: 64px;
-} */
-
-.canvas,
-.preview {
-	flex: 1;
-	display: grid;
-	grid-template-columns: repeat(16, 1fr);
+.variant-glyphs>.preview {
 	aspect-ratio: 1;
-	transform: rotate(-90deg);
-}
-
-.canvas {
-	flex: 1;
-	gap: 2px;
-}
-
-.preview {
-	gap: 0;
-}
-
-.canvas-cell,
-.preview-cell {
 	background-color: var(--b2);
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transform: rotate(90deg);
+	background-size: 80%;
+	background-position: top right;
+	background-repeat: no-repeat;
 }
 
-.canvas-cell-outer,
-.preview-cell-outer {
-	background-color: var(--b3);
+.variant-glyphs>.preview:hover {
+	box-shadow: inset 0 -1px 0 0 var(--accent);
 }
 
-.canvas-cell-on,
-.preview-cell-on {
+.variant-glyphs>.preview::after {
+	content: attr(data-char);
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* background-color: var(--bg); */
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 12px;
+	padding: 0 3px 2px 0;
+	border-bottom-right-radius: var(--radius);
+}
+
+.variant-glyphs>.preview.selected {
+	box-shadow: inset 0 -3px 0 0 var(--accent);
+}
+
+/* .variant-glyphs>.preview.selected::after {
 	background-color: var(--fg);
+	color: var(--bg);
+} */
+
+#onionskin,
+#canvas,
+#guides {
+	position: absolute;
+	width: 100%;
+}
+
+canvas {
+	width: 100%;
+	image-rendering: pixelated;
+	border-radius: var(--radius);
 }

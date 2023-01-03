@@ -4,9 +4,11 @@ A visual editor for Adafruit GFX Fonts. Generates C code.
 
 ## Reference
 
+[Source](https://adafruit.github.io/Adafruit-GFX-Library/html/struct_g_f_xfont.html)
+
 - The GFXfont struct consists of:
-  - a uint8_t* pointer to bitmap containing the glyph data
-  - a GFXglyph* pointer to an array of glyph structs
+  - uint8_t* bitmap, a pointer to the glyph data
+  - GFXglyph* glyph, an array of glyph structs
   - uint16_t's first and last (ascii codes)
   - uint8_t yAdvance (line height)
 

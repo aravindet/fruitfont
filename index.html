@@ -9,20 +9,65 @@
 </head>
 
 <body>
-    <template id="fontpane">
-        <div class="fontpane">
-            <div class="fontpane-config">
-                <input class="fontpane-config-name" data-prop="name" placeholder="Font name" />
-                <input class="fontpane-config-first" data-prop="first" type="number" min="0" max="255" value="32" />
-                <input class="fontpane-config-last" data-prop="last" type="number" min="0" max="255" value="127" />
-                <input class="fontpane-config-ystep" data-prop="ystep" type="number" min="0" max="255" value="10" />
+    <template id="variant">
+        <div class="variant">
+            <div class="variant-config island">
+                <label class="variant-config-ystep">
+                    Line height
+                    <input data-prop="ystep" type="number" min="0" max="255" />
+                </label>
+                <label class="variant-config-style">
+                    Style
+                    <input data-prop="style" placeholder="Regular" />
+                </label>
             </div>
-            <div class="fontpane-glyphs"></div>
+            <div class="variant-glyphs island"></div>
         </div>
     </template>
 
-    <div id="editor"></div>
-    <script type="module" src="editor.js"></script>
+    <div id="editor">
+        <div id="font-panel" class="island">
+            <label class="font-name">
+                Font name
+                <input data-prop="name" />
+            </label>
+            <button id="save" disabled>📥<div>Save</div></button>
+            <button id="load" disabled>📤<div>Load</div></button>
+            <button id="export">📦<div>Export</div></button>
+            <button id="reset">🗑<div>Reset</div></button>
+            <label class="font-first">
+                First char
+                <input data-prop="charfirst" type="number" min="0" max="255" />
+            </label>
+            <label class="font-last">
+                Last char
+                <input data-prop="charlast" type="number" min="0" max="255" />
+            </label>
+            <label class="font-xmin">
+                Min x
+                <input data-prop="xmin" type="number" min="-127" max="0" />
+            </label>
+            <label class="font-xmax">
+                Max x
+                <input data-prop="xmax" type="number" min="0" max="127" />
+            </label>
+            <label class="font-ymin">
+                Min y
+                <input data-prop="ymin" type="number" min="-127" max="0" />
+            </label>
+            <label class="font-ymax">
+                Max y
+                <input data-prop="ymax" type="number" min="0" max="127" />
+            </label>
+        </div>
+        <div id="variant-panel"></div>
+        <div id="glyph-panel">
+            <div id="onionskin"></div>
+            <div id="canvas"></div>
+            <div id="guides"></div>
+        </div>
+    </div>
+    <script type="module" src="js/editor.js"></script>
 </body>
 
 </html>
