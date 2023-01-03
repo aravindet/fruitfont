@@ -247,8 +247,7 @@ button:hover:not(:focus-visible):not(:disabled) {
 } */
 
 #onionskin,
-#canvas,
-#guides {
+#canvas {
 	position: absolute;
 	width: 100%;
 	max-height: 100%;
