@@ -50,7 +50,7 @@ document.querySelector("#export").addEventListener("click", () => {
 	link.download = `${font.data.name}.h`;
 	link.href = url;
 	document.body.appendChild(link);
-	// link.click();
+	link.click();
 	document.body.removeChild(link);
 });
 

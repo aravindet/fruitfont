@@ -30,7 +30,7 @@
 } */
 
 body {
-	padding: 4rem 2rem;
+	padding: 2rem 2rem;
 	margin: 0;
 	height: 100%;
 	width: 100%;
@@ -101,6 +101,11 @@ input:hover:not(:focus-visible):not(:disabled),
 select:hover:not(:focus-visible):not(:disabled),
 button:hover:not(:focus-visible):not(:disabled) {
 	box-shadow: inset 0 -1px 0 0 var(--accent);
+}
+
+.title {
+	text-align: right;
+	margin: 1rem 0.5rem;
 }
 
 #editor {
